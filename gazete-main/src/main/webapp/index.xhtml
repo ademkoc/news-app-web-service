@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<title>Admin Paneli</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="shortcut icon" href="./imgs/favicon.ico"></link>
+	
+	<h:outputStylesheet name="css/material.min.css"></h:outputStylesheet>
+	<h:outputScript name="js/material.min.js"></h:outputScript>
+	<h:outputScript name="js/jquery.min.js"></h:outputScript>
+</h:head> 
+
+<body> 	
+	<h:form id="formid" style="margin-left:auto; margin-right:auto; margin-top:200px; width:250px;">
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+			<h:inputText value="#{kullanici.kullaniciAdi}" id="username" class="mdl-textfield__input"/>
+    		<label class="mdl-textfield__label" for="username">Kullanıcı adı</label>
+		</div>
+		<br/>
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+			<h:inputSecret value="#{kullanici.sifre}" class="mdl-textfield__input" id="pass"/>
+    		<label class="mdl-textfield__label" for="pass">Şifre</label>
+		</div>
+		<br/>
+		<h:commandButton action="#{kullanici.authenticate}" value="Giriş yap" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"/>
+		<h:messages for="pass" style="color:red;list-style-type:none"/>
+	</h:form>
+</body> 
+</html>

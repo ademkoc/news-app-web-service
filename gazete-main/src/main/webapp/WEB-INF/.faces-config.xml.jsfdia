@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#index.xhtml" PATH="/index.xhtml"
+  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#index.xhtml:0" NAME="item"
+   PATH="/index.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="success:#{kullanici.authenticate}:#main.xhtml" NAME="output"
+    PATH="/main.xhtml" TARGET="rules:#main.xhtml"
+    TITLE="#{kullanici.authenticate}:success" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="fail:#{kullanici.authenticate}:#index.xhtml"
+    NAME="output1" PATH="/index.xhtml" TARGET="rules:#index.xhtml"
+    TITLE="#{kullanici.authenticate}:fail" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#main.xhtml" PATH="/main.xhtml"
+  SHAPE="256,33,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

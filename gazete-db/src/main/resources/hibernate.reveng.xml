@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="dbgazete" match-name="haberler"/>
+  <table-filter match-catalog="dbgazete" match-name="kategoriler"/>
+  <table-filter match-catalog="dbgazete" match-name="kaynaklar"/>
+  <table-filter match-catalog="dbgazete" match-name="kullanici_kategoriler"/>
+  <table-filter match-catalog="dbgazete" match-name="kullanicilar"/>
+</hibernate-reverse-engineering>

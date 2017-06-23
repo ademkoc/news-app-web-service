@@ -1,0 +1,24 @@
+.custom-td{
+	max-width:350px;
+	overflow:hidden;
+	text-overflow: ellipsis;
+}
+.custom-th{
+	text-align: left !important;
+}
+.my-form{
+	padding: 15px;
+	margin-bottom: 30px;
+	width: 300px;
+	float: left;
+}
+.child-css{
+	margin-right: 20px;
+	display: inline-block;
+}
+.parent-css{
+	width: auto;
+	overflow-x: auto;
+    overflow-y: auto;
+    white-space: nowrap;
+}

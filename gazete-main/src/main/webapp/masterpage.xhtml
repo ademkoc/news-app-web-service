@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<title>Admin Paneli</title>
+	
+	<ui:insert name="page-header"></ui:insert>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="shortcut icon" href="./imgs/favicon.ico"></link>
+	
+	<h:outputStylesheet name="css/material.min.css"></h:outputStylesheet>
+	<h:outputStylesheet name="css/style.css"></h:outputStylesheet>
+	<h:outputScript name="js/material.min.js"></h:outputScript>
+	<h:outputScript name="js/jquery.min.js"></h:outputScript>
+	
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</h:head> 
+
+<h:body> 
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+	  	<header class="mdl-layout__header">
+	  		<div class="mdl-layout__header-row">
+	      	<div class="mdl-layout-spacer"></div>
+	      	<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+		 		<h:form>
+		 			<h:commandLink action="#{main.logout}" value="" style="color:white">
+				        <label class="mdl-button mdl-js-button mdl-button--icon" style="top: 1px; right: -20px; padding: 5px">
+							<i class="material-icons">exit_to_app</i>
+				        </label>
+		        	</h:commandLink>
+		 		</h:form>
+		 		
+		        
+	    	</div>
+	  	</div>
+	  </header>
+	  <div class="mdl-layout__drawer">
+	  	<span class="mdl-layout-title "><a href="./main.jsf" style="text-decoration: none; color: grey; font-weight: 300px;">Admin Paneli</a></span>
+	    <nav class="mdl-navigation">
+	      	<a class="mdl-navigation__link" href="#haberler-section" name="Haberler">Haberler</a>
+	      	<a class="mdl-navigation__link" href="#kullanicilar-section" name="Kullanicilar">Kullanıcılar</a>
+	      	<a class="mdl-navigation__link" href="#kategoriler-section" name="Kategoriler">Kategoriler</a>
+	    	<a class="mdl-navigation__link" href="#kaynaklar-section" name="Kaynaklar">Kaynaklar</a>
+	    </nav>
+	  	</div>
+	  	<main class="mdl-layout__content">
+		    <div class="page-content">
+		    	<ui:insert name="page-content"></ui:insert>			
+			</div>
+	  	</main>
+	</div>
+	
+	<ui:insert name="styles"></ui:insert>
+
+</h:body> 
+</html>
