@@ -67,6 +67,22 @@ public abstract class BaseHibernateDAO<T extends Serializable>{
 		}
 	}
 	
+	public void delete(T entity) {
+		if (entity == null) {
+			throw new IllegalArgumentException("Entity Must not be Null");
+		}
+
+		try {
+			Session session = this.getCurrentSession();
+			Transaction transaction = session.beginTransaction();
+			session.delete(entity);
+			transaction.commit();
+		} catch (HibernateException e) {
+			System.err.printf("Error while delete Entity. M: " + e.getMessage()
+					+ " C: " + e.getCause(), e);
+		}
+	}
+	
 	public List<T> getAll() {
 		try {
 			Session session = this.getCurrentSession();

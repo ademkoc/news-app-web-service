@@ -195,13 +195,18 @@ public class NewsService {
     }
 	
 	private Haber getNews(URL url) {
-		if (url.getFile().contains("galeri")) {
+		if (url.getFile().contains("galeri") || url.getFile().contains("fotohaber") || url.getFile().contains("webtv")) {
 			return null;
 		}
 		try {
 			
 			String source = getUrlSource(url);
 			System.out.println(source);
+			
+			if (source.contains("paginationFrame")) {
+				System.out.println("paginationFrame founded");
+				return null;
+			}
 			
 			if (getKategori(source) == null) {
 				System.out.println("Kategori is null");

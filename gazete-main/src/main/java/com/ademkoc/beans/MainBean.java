@@ -13,7 +13,7 @@ import javax.faces.context.FacesContext;
 public class MainBean {
 
 	private static boolean isLoginIn;
-	public static final String KEY = "REGISTER_STATUS";
+	public static final String FORM_RESULT_KEY = "REGISTER_STATUS";
 	
 	
 	public void onload() throws IOException {
@@ -25,10 +25,10 @@ public class MainBean {
 		    return;
 		}
 		
-	    if(ec.getFlash().containsKey(KEY)) {
+	    if(ec.getFlash().containsKey(FORM_RESULT_KEY)) {
     		FacesContext facesContext = FacesContext.getCurrentInstance();
     		FacesMessage facesMessage = new FacesMessage();
-	    	if((boolean) ec.getFlash().get(KEY)) {
+	    	if((boolean) ec.getFlash().get(FORM_RESULT_KEY)) {
 	    		facesMessage.setSummary("200");
 	    	}else{
 	    		facesMessage.setSummary("400");

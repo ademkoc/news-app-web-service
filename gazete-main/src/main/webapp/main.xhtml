@@ -19,87 +19,103 @@ xmlns:ui="http://java.sun.com/jsf/facelets" template="masterpage.xhtml"
 			    	<h3>Haberler</h3>
 			    	
 		    		<h:form id="formid-haberler" class="mdl-data-table mdl-shadow--2dp my-form">
-						<div class="mdl-textfield mdl-js-textfield">
+		  				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						    <h:inputText value="#{haberler.id}" class="mdl-textfield__input" id="haberId"></h:inputText>
+						    <label class="mdl-textfield__label" for="haberId">ID</label>
+					  	</div>
+						<br/>
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 						    <h:inputText value="#{haberler.baslik}" class="mdl-textfield__input" id="baslik"></h:inputText>
 						    <label class="mdl-textfield__label" for="baslik">Haber başlık</label>
 					  	</div>
 						<br/>
-					  	<div class="mdl-textfield mdl-js-textfield">
-						    <h:inputTextarea value="#{haberler.haberMetni}" class="mdl-textfield__input" rows= "3" id="haber-metni" cols="3"></h:inputTextarea>
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						    <h:inputTextarea value="#{haberler.haberMetni}" class="mdl-textfield__input" rows= "20" id="haber-metni" cols="3"></h:inputTextarea>
 						    <label class="mdl-textfield__label" for="haber-metni">Haber metni...</label>
 					  	</div>
 						<br/>
-					  	<div class="mdl-textfield mdl-js-textfield">
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 						    <h:inputText value="#{haberler.resimUrl}" class="mdl-textfield__input" id="resim-url"></h:inputText>
 						    <label class="mdl-textfield__label" for="resim-url">Resim linki</label>
 					  	</div>
 						<br/>
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-				            <h:selectOneMenu id="selector" value="#{haberler.selectedKategori}" class="mdl-textfield__input">
-							   <f:selectItems value="#{haberler.kategoriler}" class=""/>
-							</h:selectOneMenu>
+						<div class="mdl-textfield mdl-js-textfield">
+							<h:selectOneMenu value="#{haberler.kategoriId}" class="mdl-textfield__input">
+				   				<f:selectItems value="#{kategoriler.kategoriList}" var="k" itemLabel="#{k.kategoriAdi}" itemValue="#{k.id}" class="mdl-textfield__label"/>
+				   			</h:selectOneMenu>
 				        </div>
 						<br/>
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-				            <h:selectOneMenu value="#{haberler.selectedKaynak}" class="mdl-textfield__input">
-							   <f:selectItems value="#{haberler.kaynaklar}" class="mdl-textfield__label"/>
-							</h:selectOneMenu>
+						<div class="mdl-textfield mdl-js-textfield">
+							<h:selectOneMenu value="#{haberler.kaynakId}" class="mdl-textfield__input">
+				   				<f:selectItems value="#{kaynaklar.kaynaklarList}" var="k" itemLabel="#{k.kaynakAdi}" itemValue="#{k.id}" class="mdl-textfield__label"/>
+				   			</h:selectOneMenu>
 				        </div>
-						<br/>
-						<h:commandButton action="#{haberler.saveHaber}" value="Ekle" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"/>
+				        <br/>
+						<h:commandButton action="#{haberler.saveHaber}" value="Ekle veya Güncelle" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"/>
 					</h:form>
-					
-	    			<h:dataTable value="#{haberler.haberList}" var="o" 
-	    				headerClass="custom-th"
-	    				columnClasses="mdl-data-table__cell--non-numeric,mdl-data-table__cell--non-numeric,mdl-data-table__cell--non-numeric,mdl-data-table__cell--non-numeric,custom-td,custom-td,custom-td,mdl-data-table__cell--non-numeric"
-	    				styleClass="mdl-data-table mdl-js-data-table mdl-shadow--2dp" >
-	    				
-		    			<h:column>
-		    				<f:facet name="header">ID</f:facet>
-		    				#{o.id}
-		    			</h:column>
-		
-			    		<h:column>
-		    				<f:facet name="header">ID From Source</f:facet>
-		    				#{o.idFromSource}
-		    			</h:column>
-		    			
-		    			<h:column>
-		    				<f:facet name="header">Kategori</f:facet>
-		    				#{o.kategori.kategoriAdi}
-		    			</h:column>
-		    	
-		     			<h:column>
-		    				<f:facet name="header">Kaynak</f:facet>
-		    				#{o.kaynak.kaynakAdi}
-		    			</h:column>
-		    			
-		    			<h:column>
-		    				<f:facet name="header">Haber Başlığı</f:facet>
-		    				#{o.haberBaslik}
-		    			</h:column>
-		    			
-		    			<h:column>
-		    				<f:facet name="header">Haber Resmi</f:facet>
-		    				<a href="#{o.imgUrl}" target="_blank">#{o.imgUrl}</a>
-		    			</h:column>
-		    			
-		    			<h:column>
-		    				<f:facet name="header">Haber Metni</f:facet>
-		    				#{o.haberMetni}
-		    			</h:column>
-		
-			    		<h:column>
-		    				<f:facet name="header">Tarih</f:facet>
-		    				#{o.tarih}
-		    			</h:column>
-		    			
-		    		</h:dataTable>
-				
+					<h:form class="mdl-data-table mdl-shadow--2dp" style="padding-left:10px;">
+						<div>
+							<h4>Haberler Tablosu</h4>
+						</div>
+		    			<h:dataTable value="#{haberler.haberList}" var="o" 
+		    				id="haberlerDataTable"
+		    				headerClass="custom-th"
+		    				columnClasses="mdl-data-table__cell--non-numeric,mdl-data-table__cell--non-numeric,mdl-data-table__cell--non-numeric,mdl-data-table__cell--non-numeric,custom-td,custom-td,custom-td,mdl-data-table__cell--non-numeric"
+		    				styleClass="mdl-data-table mdl-js-data-table" >
+		    				
+			    			<h:column>
+			    				<f:facet name="header">ID</f:facet>
+			    				#{o.id}
+			    			</h:column>
+			
+				    		<h:column>
+			    				<f:facet name="header">ID From Source</f:facet>
+			    				#{o.idFromSource}
+			    			</h:column>
+			    			
+			    			<h:column>
+			    				<f:facet name="header">Kategori</f:facet>
+			    				#{o.kategori.kategoriAdi}
+			    			</h:column>
+			    	
+			     			<h:column>
+			    				<f:facet name="header">Kaynak</f:facet>
+			    				#{o.kaynak.kaynakAdi}
+			    			</h:column>
+			    			
+			    			<h:column>
+			    				<f:facet name="header">Haber Başlığı</f:facet>
+			    				#{o.haberBaslik}
+			    			</h:column>
+			    			
+			    			<h:column>
+			    				<f:facet name="header">Haber Resmi</f:facet>
+			    				<a href="#{o.imgUrl}" target="_blank">#{o.imgUrl}</a>
+			    			</h:column>
+			    			
+			    			<h:column>
+			    				<f:facet name="header">Haber Metni</f:facet>
+			    				#{o.haberMetni}
+			    			</h:column>
+			
+				    		<h:column>
+			    				<f:facet name="header">Tarih</f:facet>
+			    				#{o.tarih}
+			    			</h:column>
+			    			
+			    			<h:column>
+			    				<f:facet name="header">Düzenle</f:facet>
+			    				<h:commandLink action="#{haberler.editHaber(o)}" value="Düzenle" />
+			    			</h:column>
+			    			
+			       			<h:column>
+			    				<f:facet name="header">Sil</f:facet>
+			    				<h:commandLink action="#{haberler.deleteHaber(o)}" value="Sil" />
+			    			</h:column>
+			    		</h:dataTable>
+		    		</h:form>
 				</div>
-				
 			</section>
-
 		</div>
 		<!-- ### HABERLER BITIS ### -->
 		
@@ -110,56 +126,75 @@ xmlns:ui="http://java.sun.com/jsf/facelets" template="masterpage.xhtml"
 			    	<h3>Kullanıcılar</h3>
 			    	
 	 		    	<h:form id="formid-kullanicilar" class="mdl-data-table mdl-shadow--2dp my-form">
-						<div class="mdl-textfield mdl-js-textfield">
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						    <h:inputText value="#{kullanicilar.id}" class="mdl-textfield__input" id="kullaniciID"></h:inputText>
+						    <label class="mdl-textfield__label" for="kullaniciID">ID</label>
+					  	</div>
+						<br/>
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 						    <h:inputText value="#{kullanicilar.isim}" class="mdl-textfield__input" id="isim"></h:inputText>
 						    <label class="mdl-textfield__label" for="isim">İsim</label>
 					  	</div>
 						<br/>
-					  	<div class="mdl-textfield mdl-js-textfield">
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 						    <h:inputText value="#{kullanicilar.eposta}" class="mdl-textfield__input" id="e-posta"></h:inputText>
 						    <label class="mdl-textfield__label" for="e-posta">E-Posta</label>
 					  	</div>
 						<br/>
-					  	<div class="mdl-textfield mdl-js-textfield">
-						    <h:inputSecret value="#{kullanicilar.sifre}" class="mdl-textfield__input" id="sifre"></h:inputSecret>
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						    <h:inputText value="#{kullanicilar.sifre}" class="mdl-textfield__input" id="sifre"></h:inputText>
 						    <label class="mdl-textfield__label" for="sifre">Şifre</label>
 					  	</div>
 						<br/>
-					  	<div class="mdl-textfield mdl-js-textfield">
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 						    <h:inputText value="#{kullanicilar.token}" class="mdl-textfield__input" id="token"></h:inputText>
 						    <label class="mdl-textfield__label" for="token">Token</label>
 					  	</div>
 						<br/>
-						<h:commandButton action="#{kullanicilar.saveKullanici}" value="Ekle" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"/>
+						<h:commandButton action="#{kullanicilar.saveKullanici}" value="Ekle veya Güncelle" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"/>
 					</h:form>
-				
-	    			<h:dataTable value="#{kullanicilar.kullanicilarList}" var="k" 
-	    				headerClass="custom-th"
-	    				columnClasses="mdl-data-table__cell--non-numeric,mdl-data-table__cell--non-numeric,mdl-data-table__cell--non-numeric,custom-td"
-	    				styleClass="mdl-data-table mdl-js-data-table mdl-shadow--2dp" >
-	    				
-		    			<h:column>
-		    				<f:facet name="header">ID</f:facet>
-		    				#{k.id}
-		    			</h:column>
-		
-			    		<h:column>
-		    				<f:facet name="header">E-Posta</f:facet>
-		    				#{k.eposta}
-		    			</h:column>
-		    			
-		    			<h:column>
-		    				<f:facet name="header">İsim</f:facet>
-		    				#{k.isim}
-		    			</h:column>
-		    			
-		    			<h:column>
-		    				<f:facet name="header">Token</f:facet>
-		    				#{k.token}
-		    			</h:column>
-		    			
-		    		</h:dataTable>
-				
+					<h:form class="mdl-data-table mdl-shadow--2dp" style="padding-left:10px;">
+						<div>
+							<h4>Kullanıcılar Tablosu</h4>
+						</div>
+		    			<h:dataTable value="#{kullanicilar.kullanicilarList}" var="k" 
+		    				id="kullanicilarDataTable" 
+		    				headerClass="custom-th"
+		    				columnClasses="mdl-data-table__cell--non-numeric,mdl-data-table__cell--non-numeric,mdl-data-table__cell--non-numeric,custom-td"
+		    				styleClass="mdl-data-table mdl-js-data-table" >
+		    				
+			    			<h:column>
+			    				<f:facet name="header">ID</f:facet>
+			    				#{k.id}
+			    			</h:column>
+			
+				    		<h:column>
+			    				<f:facet name="header">E-Posta</f:facet>
+			    				#{k.eposta}
+			    			</h:column>
+			    			
+			    			<h:column>
+			    				<f:facet name="header">İsim</f:facet>
+			    				#{k.isim}
+			    			</h:column>
+			    			
+			    			<h:column>
+			    				<f:facet name="header">Token</f:facet>
+			    				#{k.token}
+			    			</h:column>
+			    			
+			    			<h:column>
+			    				<f:facet name="header">Düzenle</f:facet>
+			    				<h:commandLink action="#{kullanicilar.editKullanici(k)}" value="Düzenle" />
+			    			</h:column>
+			    			
+			       			<h:column>
+			    				<f:facet name="header">Sil</f:facet>
+			    				<h:commandLink action="#{kullanicilar.deleteKullanici(k)}" value="Sil" />
+			    			</h:column>
+			    			
+			    		</h:dataTable>
+					</h:form>
 				</div>
 			</section>
 		</div>
@@ -172,31 +207,50 @@ xmlns:ui="http://java.sun.com/jsf/facelets" template="masterpage.xhtml"
 			    	<h3>Kategoriler</h3>
 				
 					<h:form id="formid-kategoriler" class="mdl-data-table mdl-shadow--2dp my-form">
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<h:inputText value="#{kategoriler.id}" id="kategoriId" class="mdl-textfield__input"/>
+				    		<label class="mdl-textfield__label" for="kategoriId">ID</label>
+						</div>
+						<br/>
 			  			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 							<h:inputText value="#{kategoriler.kategori}" id="kategoriAdi" class="mdl-textfield__input"/>
 				    		<label class="mdl-textfield__label" for="kategoriAdi">Kaynak</label>
 						</div>
 						<br/>
-						<h:commandButton action="#{kategoriler.saveKategori()}" value="Ekle" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"/>
+						<h:commandButton action="#{kategoriler.saveKategori()}" value="Ekle veya Güncelle" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"/>
 					</h:form>
 					
-					<h:dataTable value="#{kategoriler.kategoriList}" var="k" 
-	    				headerClass="custom-th"
-	    				id="kategorilerDataTable"
-	    				columnClasses="mdl-data-table__cell--non-numeric,mdl-data-table__cell--non-numeric"
-	    				styleClass="mdl-data-table mdl-js-data-table" >
-	    				
-		    			<h:column>
-		    				<f:facet name="header">ID</f:facet>
-		    				#{k.id}
-		    			</h:column>
-		
-			    		<h:column>
-		    				<f:facet name="header">Kategori</f:facet>
-							#{k.kategoriAdi}
-		    			</h:column>
+					<h:form class="mdl-data-table mdl-shadow--2dp" style="padding-left:10px;">
+						<div>
+							<h4>Kategoriler Tablosu</h4>
+						</div>
+						<h:dataTable value="#{kategoriler.kategoriList}" var="k" 
+		    				id="kategorilerDataTable" 
+		    				styleClass="mdl-data-table mdl-js-data-table">
+		    				
+			    			<h:column>
+			    				<f:facet name="header">ID</f:facet>
+			    				#{k.id}
+			    			</h:column>
+			
+				    		<h:column>
+			    				<f:facet name="header">Kategori</f:facet>
+								#{k.kategoriAdi}
+			    			</h:column>
+			    			
+			    			<h:column>
+			    				<f:facet name="header">Düzenle</f:facet>
+			    				<h:commandLink action="#{kategoriler.editKategori(k)}" value="Düzenle" />
+			    			</h:column>
+			    			
+			       			<h:column>
+			    				<f:facet name="header">Sil</f:facet>
+			    				<h:commandLink action="#{kategoriler.deleteKategori(k)}" value="Sil" />
+			    			</h:column>
+			    		
+			    		</h:dataTable>
+		    		</h:form>
 		    		
-		    		</h:dataTable>
 				</div>
 			</section>
 		</div>
@@ -210,6 +264,11 @@ xmlns:ui="http://java.sun.com/jsf/facelets" template="masterpage.xhtml"
 			   
 			    	<h:form id="formid-kaynaklar" class="mdl-data-table mdl-shadow--2dp my-form">
 			  			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<h:inputText value="#{kaynaklar.id}" id="kaynakId" class="mdl-textfield__input"/>
+				    		<label class="mdl-textfield__label" for="kaynakId">ID</label>
+						</div>
+						<br/>
+			  			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 							<h:inputText value="#{kaynaklar.kaynakAdi}" id="kaynak" class="mdl-textfield__input"/>
 				    		<label class="mdl-textfield__label" for="kaynak">Kaynak</label>
 						</div>
@@ -219,32 +278,44 @@ xmlns:ui="http://java.sun.com/jsf/facelets" template="masterpage.xhtml"
 				    		<label class="mdl-textfield__label" for="kategoriResimUrl">Kategori resim yolu</label>
 						</div>
 						<br/>
-						<h:commandButton action="#{kaynaklar.saveKaynak}" value="Ekle" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"/>
+						<h:commandButton action="#{kaynaklar.saveKaynak}" value="Ekle veya Güncelle" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"/>
 						<div id="mess"><h:messages for="kaynak" style="color:red;display:none"/></div>
 					</h:form>
-				
-					<h:dataTable value="#{kaynaklar.kaynaklarList}" var="k" 
-	    				headerClass="custom-th"
-	    				columnClasses="mdl-data-table__cell--non-numeric,mdl-data-table__cell--non-numeric,custom-th"
-	    				styleClass="mdl-data-table mdl-js-data-table mdl-shadow--2dp" >
-	    				
-		    			<h:column>
-		    				<f:facet name="header">ID</f:facet>
-		    				#{k.id}
-		    			</h:column>
-		
-			    		<h:column>
-		    				<f:facet name="header">Kaynak Adı</f:facet>
-		    				#{k.kaynakAdi}
-		    			</h:column>
-		
-			    		<h:column>
-		    				<f:facet name="header">Kaynak Resmi</f:facet>
-		    				#{k.imgUrl}
-		    			</h:column>
-		    			
-		    		</h:dataTable>
-				
+					<h:form class="mdl-data-table mdl-shadow--2dp" style="padding-left:10px;">
+						<div>
+							<h4>Kaynaklar Tablosu</h4>
+						</div>
+						<h:dataTable value="#{kaynaklar.kaynaklarList}" var="k" 
+							id="kaynaklarDataTable"
+		    				styleClass="mdl-data-table mdl-js-data-table"
+		    				headerClass="custom-th"
+		    				columnClasses="mdl-data-table__cell--non-numeric,mdl-data-table__cell--non-numeric,custom-th" >
+			    			<h:column>
+			    				<f:facet name="header">ID</f:facet>
+			    				#{k.id}
+			    			</h:column>
+			
+				    		<h:column>
+			    				<f:facet name="header">Kaynak Adı</f:facet>
+			    				#{k.kaynakAdi}
+			    			</h:column>
+			
+				    		<h:column>
+			    				<f:facet name="header">Kaynak Resmi</f:facet>
+			    				#{k.imgUrl}
+			    			</h:column>
+			    			
+			    			<h:column>
+			    				<f:facet name="header">Düzenle</f:facet>
+			    				<h:commandLink action="#{kaynaklar.editKaynak(k)}" value="Düzenle" />
+			    			</h:column>
+			    			
+			       			<h:column>
+			    				<f:facet name="header">Sil</f:facet>
+			    				<h:commandLink action="#{kaynaklar.deleteKaynak(k)}" value="Sil" />
+			    			</h:column>
+			    		</h:dataTable>
+					</h:form>		
 				</div>
 			</section>
 		</div>
@@ -283,20 +354,24 @@ xmlns:ui="http://java.sun.com/jsf/facelets" template="masterpage.xhtml"
 			$("div.mdl-cell").addClass("parent-css");
 			$("div.mdl-cell form").addClass("child-css");
 			$("div.mdl-cell table").addClass("child-css");
+
 		});
 		
 		r(function(){
 			var asd = $("#mess").text().trim();
 			if(asd != "") {
 				if(asd=="200") {
-				    var data = {message: 'Kayıt Başarılı'};
+				    var data = {message: 'İşlem Başarılı'};
 				}else if(asd=="400") {
-				    var data = {message: 'Kayıt Başarısız'};
+				    var data = {message: 'İşlem Başarısız'};
 				}
 				'use strict';
 			  	var snackbarContainer = document.querySelector('#demo-toast-example');
 			    snackbarContainer.MaterialSnackbar.showSnackbar(data);
 			}
+
+			$("table[id$='DataTable']").DataTable();			
+			
 		});
 		function r(f){/in/.test(document.readyState)?setTimeout('r('+f+')',9):f()}
 	 </script>  
